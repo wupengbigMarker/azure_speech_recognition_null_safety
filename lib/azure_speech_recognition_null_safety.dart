@@ -122,6 +122,20 @@ class AzureSpeechRecognition {
     }
   }
 
+  // Performs webrtc stream recognition until a silence is detected
+  static void webrtcStreamRecognition() {
+    if ((_subKey != null && _region != null)) {
+      _channel.invokeMethod('webrtcStream', {
+        'language': _lang,
+        'subscriptionKey': _subKey,
+        'region': _region,
+        'timeout': _timeout
+      });
+    } else {
+      throw "Error: SpeechRecognitionParameters not initialized correctly";
+    }
+  }
+
   /// Performs speech recognition until a silence is detected (with speech assessment)
   static void simpleVoiceRecognitionWithAssessment(
       {String? referenceText,

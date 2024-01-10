@@ -87,10 +87,10 @@ public class SwiftAzureSpeechRecognitionPlugin: NSObject, FlutterPlugin {
             print("Started recognition with task ID \(taskId)")
             var speechConfig: SPXSpeechConfiguration?
             do {
-                let audioSession = AVAudioSession.sharedInstance()
-                // Request access to the microphone
-                try audioSession.setCategory(AVAudioSession.Category.record, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.allowBluetooth)
-                try audioSession.setActive(true)
+                // let audioSession = AVAudioSession.sharedInstance()
+                // // Request access to the microphone
+                // try audioSession.setCategory(AVAudioSession.Category.record, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.allowBluetooth)
+                // try audioSession.setActive(true)
                 print("Setting custom audio session")
                 // Initialize speech recognizer and specify correct subscription key and service region
                 try speechConfig = SPXSpeechConfiguration(subscription: speechSubscriptionKey, region: serviceRegion)
