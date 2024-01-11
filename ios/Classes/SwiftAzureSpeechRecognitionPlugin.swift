@@ -218,16 +218,16 @@ public class SwiftAzureSpeechRecognitionPlugin: NSObject, FlutterPlugin {
         }
         else {
             print("Starting continous recognition")
-            // do {
-            //     let audioSession = AVAudioSession.sharedInstance()
-            //     // Request access to the microphone
-            //     try audioSession.setCategory(AVAudioSession.Category.record, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.allowBluetooth)
-            //     try audioSession.setActive(true)
-            //     print("Setting custom audio session")
-            // }
-            // catch {
-            //     print("An unexpected error occurred")
-            // }
+            do {
+                let audioSession = AVAudioSession.sharedInstance()
+                // Request access to the microphone
+                try audioSession.setCategory(AVAudioSession.Category.record, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.allowBluetooth)
+                try audioSession.setActive(true)
+                print("Setting custom audio session")
+            }
+            catch {
+                print("An unexpected error occurred")
+            }
             
             let speechConfig = try! SPXSpeechConfiguration(subscription: speechSubscriptionKey, region: serviceRegion)
             
