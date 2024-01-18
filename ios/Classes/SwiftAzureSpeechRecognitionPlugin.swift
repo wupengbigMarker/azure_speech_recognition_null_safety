@@ -65,6 +65,18 @@ public class SwiftAzureSpeechRecognitionPlugin: NSObject, FlutterPlugin {
             print("Called continuousStreamWithAssessment")
             continuousStreamWithAssessment(referenceText: referenceText, phonemeAlphabet: phonemeAlphabet,  granularity: granularity, enableMiscue: enableMiscue, speechSubscriptionKey: speechSubscriptionKey, serviceRegion: serviceRegion, lang: lang)
         }
+        else if (call.method == "stopContinuousRecord") {
+            print("Called stopContinuousRecord")
+            do {
+                try continousSpeechRecognizer!.stopContinuousRecognition()
+                self.azureChannel.invokeMethod("speech.onRecognitionStopped", arguments: nil)
+                continousSpeechRecognizer = nil
+                continousListeningStarted = false
+            }
+            catch {
+                print("Error occurred stopping continous recognition")
+            }
+        }
         else {
             result(FlutterMethodNotImplemented)
         }

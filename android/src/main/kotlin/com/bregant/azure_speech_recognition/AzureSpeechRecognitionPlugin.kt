@@ -119,6 +119,10 @@ class AzureSpeechRecognitionPlugin : FlutterPlugin, Activity(), MethodCallHandle
                 )
             }
 
+            "stopContinuousRecord" -> {
+                stopContinuousRecord()
+            }
+
             else -> {
                 result.notImplemented()
             }
@@ -310,6 +314,20 @@ class AzureSpeechRecognitionPlugin : FlutterPlugin, Activity(), MethodCallHandle
         } catch (exec: Exception) {
             assert(false)
             invokeMethod("speech.onException", "Exception: " + exec.message)
+        }
+    }
+
+    private fun stopContinuousRecord(){
+        if (continuousListeningStarted) {
+            val endingTask = reco.stopContinuousRecognitionAsync()
+
+            setOnTaskCompletedListener(endingTask) { result ->
+                Log.i(logTag, "Continuous recognition stopped.")
+                continuousListeningStarted = false
+                invokeMethod("speech.onRecognitionStopped", null)
+                reco.close()
+            }
+            return
         }
     }
 

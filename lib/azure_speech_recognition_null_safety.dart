@@ -195,6 +195,11 @@ class AzureSpeechRecognition {
   }
 
 
+  static void stopContinuousRecording(){
+    _channel.invokeMethod('stopContinuousRecord');
+  }
+
+
   /// When continuously recording, returns true, otherwise it returns false
   static Future<bool> isContinuousRecognitionOn() {
     return _channel.invokeMethod<bool>('isContinuousRecognitionOn').then<bool>((bool? value) => value ?? false);
